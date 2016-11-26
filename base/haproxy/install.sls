@@ -5,7 +5,7 @@
     - user: root
     - mode: 644
   cmd.run:
-    - name: tar zxf haproxy-1.6.10.tar.gz && cd haproxy-1.6.10 && make TARGET=linux26 PREFIX=/usr/local/haproxy && make install PREFIX=/usr/local/haproxy
+    - name: cd /usr/local/src && tar zxf haproxy-1.6.10.tar.gz && cd haproxy-1.6.10 && make TARGET=linux26 PREFIX=/usr/local/haproxy && make install PREFIX=/usr/local/haproxy
     - unless: test -d /usr/local/haproxy
 /etc/init.d/haproxy:
   file.managed:
@@ -19,3 +19,6 @@
     - group: root
     - dir_mode: 644
     - makedirs: True
+net.ipv4.ip_nonlocal_bind:
+  sysctl.present: 
+    - value: 1

@@ -28,6 +28,17 @@ haproxy-server:
     - group: root
     - user: root
     - mode: 755
+    - template: jinja
+    - defaults:
+      {% if grains['nodename'] == 'ha.nginxs.net' %}
+      RULE: MASTER
+      PRI: 10
+      ROUTE_ID: ha
+      {% elif grains['nodename'] == 'web01.nginxs.net' %}
+      RULE: SLAVE
+      PRI: 5
+      ROUTE_ID: web01
+      {% endif %}
 keepalived-server:
   file.managed:
     - source: salt://cluster1/files/keepalived-init

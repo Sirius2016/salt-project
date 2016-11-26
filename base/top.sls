@@ -1,9 +1,11 @@
 base:
   '*':
     - init.resolv
-    - init.pkg
     - init.rsyslog
     - init.sysctl
+    - init.epel
+    - init.pkg
+    - zabbix.agent
   'ha.nginxs.net':
     - haproxy.install
     - keepalived.install

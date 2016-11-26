@@ -24,3 +24,8 @@ keepalived-pkg:
     - group: root
     - dir_mode: 644
     - makedirs: True
+/etc/keepalived/checkhaproxy.sh:
+  file.directory:
+    - user: root
+    - group: root
+    - mode: 755
